@@ -40,7 +40,9 @@ const {Router}=require("express");
 const bcrypt=require("bcrypt");
 const {userModel}=require("../db");
 const jwt=require("jsonwebtoken");
-const JWT_USER_PASSWORD="puja123";
+const {JWT_USER_PASSWORD}=require("../config.js");
+//const JWT_USER_PASSWORD="puja123";  store in config.js file
+
 
 //return the router
 const userRouter=Router();
