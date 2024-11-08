@@ -9,11 +9,13 @@ const mongoose=require("mongoose");
 // const {createCourseRoutes}=require("./routes/courses");
 
 const {userRouter}=require("./routes/user");  
-const {courseRouter}=require("./routes/courses");
+const {courseRouter}=require("./routes/course");
 const {adminRouter}=require("./routes/admin");
 
 
 const app=express();
+
+app.use(express.json());
 
 //better way
 app.use("/api/v1/user",userRouter);
@@ -36,7 +38,7 @@ app.use("/api/v1/admin",adminRouter);
 
 //first it will run
 async function main(){
-    await mongoose.connect()
+    await mongoose.connect("mongodb+srv://puja02538:zyRWMwNQ1qCYfVSM@cluster0.d555e.mongodb.net/coursera-app1")
     app.listen(3000);
     console.log("Listening on port 3000");
 }

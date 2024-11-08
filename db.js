@@ -25,7 +25,7 @@ const adminSchema=new Schema({
 
 const courseSchema=new Schema({
     title:String,
-    RTCSessionDescription:String,
+    description:String,
     price:Number,
     imageUrl:String,
     creatorId:ObjectId,
@@ -44,7 +44,7 @@ const CourseModel=mongoose.model("courses",courseSchema);
 const PurchaseModel=mongoose.model("purchases", purchaseSchema);
 
 
-module.exports={
+module.exports = {
     UserModel,
     AdminModel,
     CourseModel,
