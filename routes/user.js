@@ -38,7 +38,8 @@
 //better way
 const {Router}=require("express");
 const bcrypt=require("bcrypt");
-const {userModel}=require("../db");
+const {userModel,PurchaseModel}=require("../db");
+const {courseModel}=require("../db");
 const jwt=require("jsonwebtoken");
 const {JWT_USER_PASSWORD}=require("../config.js");
 //const JWT_USER_PASSWORD="puja123";  store in config.js file
@@ -126,11 +127,25 @@ userRouter.post("/signin",async function(req,res){
 
 })
 
-userRouter.get("/purchases",function(req,res){
+userRouter.get("/purchases",userMiddleware,async function(req,res){
+    const userId=req.userId;
+
+    const purchases=await PurchaseModel.find({
+        userId,
+    });
+
+
+    //console.log(purchases);
+    const coursesData=await courseModel.find({
+        //array of object
+        _id:{$in:purchases.map(x=>x.courseId)}
+    })
+
 
     res.json({
 
-        message:"You have purchased the course"
+       purchases,
+       coursesData
     })
 })
 
